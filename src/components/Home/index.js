@@ -1,9 +1,12 @@
 import Header from '../Header'
+import StoriesSlider from '../StoriesSlider'
+import Posts from '../Posts'
 
 const Home = () => (
   <>
     <Header />
-    <h1>Home</h1>
+    <StoriesSlider />
+    <Posts />
   </>
 )
 export default Home

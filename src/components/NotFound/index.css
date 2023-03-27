@@ -1,0 +1,53 @@
+.not-found-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-heading {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  color: #262626;
+  margin-bottom: 0;
+}
+
+.not-found-para {
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #989898;
+}
+
+.not-found-redirect-button {
+  background-color: #4094ef;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 7px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  .not-found-heading {
+    font-size: 20px;
+  }
+
+  .not-found-para {
+    font-size: 16px;
+  }
+}

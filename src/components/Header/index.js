@@ -8,10 +8,14 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Header extends Component {
-  state = {displayMenu: true, searchInput: '', showSearchbar: true}
+  state = {displayMenu: false, searchInput: '', showSearchbar: false}
 
   showMenubar = () => {
     this.setState({displayMenu: true})
+  }
+
+  closeMenubar = () => {
+    this.setState({displayMenu: false})
   }
 
   toggleSearchbar = () => {
@@ -30,7 +34,30 @@ class Header extends Component {
     this.setState({searchInput: event.target.value})
   }
 
-  renderSearchbar = () => {
+  renderMobileSearchbar = () => {
+    const {searchInput} = this.state
+    return (
+      <div className="search-bar-mobile">
+        <input
+          type="search"
+          value={searchInput}
+          placeholder="Search Caption"
+          className="search-input"
+          onChange={this.changeInput}
+        />
+        <button
+          className="search-button"
+          type="button"
+          data-testid="searchIcon"
+          //   onClick={this.searchClicked}
+        >
+          <FaSearch className="search-icon" />
+        </button>
+      </div>
+    )
+  }
+
+  renderLargeSearchbar = () => {
     const {searchInput} = this.state
     return (
       <div className="search-bar">
@@ -45,7 +72,7 @@ class Header extends Component {
           className="search-button"
           type="button"
           data-testid="searchIcon"
-          onClick={this.searchClicked}
+          //   onClick={this.searchClicked}
         >
           <FaSearch className="search-icon" />
         </button>
@@ -53,54 +80,53 @@ class Header extends Component {
     )
   }
 
-  renderMenubar = () => {
-    const {showSearchbar} = this.state
-    return (
-      <div className="nav-menu-mobile">
-        <ul className="nav-menu-list-mobile">
-          <li className="nav-menu-item-mobile">
-            <Link to="/" className="nav-link-mobile">
-              Home
-            </Link>
-          </li>
+  renderMenubar = () => (
+    <div className="nav-menu-mobile">
+      <ul className="nav-menu-list-mobile">
+        <li className="nav-menu-item-mobile">
+          <Link to="/" className="nav-link-mobile">
+            Home
+          </Link>
+        </li>
 
-          <li
-            className="nav-menu-item-mobile search-list-item"
-            onClick={this.toggleSearchbar}
+        <li
+          className="nav-menu-item-mobile search-list-item"
+          onClick={this.toggleSearchbar}
+        >
+          Search
+        </li>
+
+        <li className="nav-menu-item-mobile">
+          <Link to="/my-profile" className="nav-link-mobile">
+            Profile
+          </Link>
+        </li>
+
+        <li className="nav-menu-item-mobile">
+          <button
+            onClick={this.onClickLogout}
+            type="button"
+            className="logout-desktop-btn"
           >
-            Search
-          </li>
+            Logout
+          </button>
+        </li>
 
-          <li className="nav-menu-item-mobile">
-            <Link to="/my-profile" className="nav-link-mobile">
-              Profile
-            </Link>
-          </li>
-
-          <li className="nav-menu-item-mobile">
-            <button
-              onClick={this.onClickLogout}
-              type="button"
-              className="logout-desktop-btn"
-            >
-              Logout
-            </button>
-          </li>
-
-          <li className="nav-menu-item-mobile">
-            <button type="button" className="close-menu-button">
-              <IoIosCloseCircle className="close-icon" />
-            </button>
-          </li>
-        </ul>
-
-        {showSearchbar ? this.renderSearchbar() : null}
-      </div>
-    )
-  }
+        <li className="nav-menu-item-mobile">
+          <button
+            type="button"
+            className="close-menu-button"
+            onClick={this.closeMenubar}
+          >
+            <IoIosCloseCircle className="close-icon" />
+          </button>
+        </li>
+      </ul>
+    </div>
+  )
 
   render() {
-    const {displayMenu} = this.state
+    const {displayMenu, showSearchbar} = this.state
     return (
       <nav className="nav-header">
         <div className="nav-content">
@@ -119,6 +145,7 @@ class Header extends Component {
               onClick={this.showMenubar}
               type="button"
               className="hamburger-button"
+              // eslint-disable-next-line react/no-unknown-property
               testid="hamburgerIcon"
             >
               <img
@@ -129,6 +156,7 @@ class Header extends Component {
             </button>
           </div>
           {displayMenu ? this.renderMenubar() : null}
+          {showSearchbar ? this.renderMobileSearchbar() : null}
           <div className="nav-bar-large-container">
             <div className="logo-container">
               <Link to="/">
@@ -141,7 +169,7 @@ class Header extends Component {
               <h1 className="website-name">Insta Share</h1>
             </div>
             <div className="links-container">
-              {this.renderSearchbar()}
+              {this.renderLargeSearchbar()}
               <ul className="nav-menu">
                 <li className="nav-menu-item">
                   <Link to="/" className="nav-link">

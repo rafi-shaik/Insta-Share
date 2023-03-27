@@ -1,0 +1,37 @@
+.main-container {
+  width: 100%;
+
+  padding-top: 40px;
+  padding-bottom: 0px;
+}
+
+.story-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-image {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .story-image {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+.story-user-name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #262626;
+}
