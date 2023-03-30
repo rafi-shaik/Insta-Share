@@ -73,7 +73,26 @@ class Posts extends Component {
     )
   }
 
-  renderFailureView = () => <h1>Failure</h1>
+  renderFailureView = () => (
+    <div className="posts-error-view-container">
+      <img
+        src="https://res.cloudinary.com/dzvmpn4nr/image/upload/v1679656589/alert-triangle_hsre5i.svg"
+        alt="failure view"
+        className="posts-failure-img"
+      />
+      <p className="posts-failure-text">
+        Something went wrong. Please try again.
+      </p>
+      <button
+        type="button"
+        data-testid="button"
+        className="profile-failure-button"
+        onClick={this.getPostsData}
+      >
+        Try again
+      </button>
+    </div>
+  )
 
   renderLoadingView = () => (
     // eslint-disable-next-line react/no-unknown-property

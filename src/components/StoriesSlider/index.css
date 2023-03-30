@@ -1,11 +1,15 @@
 .main-container {
   width: 100%;
-
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 0px;
 }
 
 .story-container {
+  list-style-type: none;
+}
+
+.story-item-container {
+  width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,4 +38,17 @@
   line-height: 24px;
   text-align: center;
   color: #262626;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.stories-error-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
 }

@@ -70,29 +70,50 @@ class StoriesSlider extends Component {
       ],
     }
     return (
-      <div>
+      <>
         <Slider {...settings}>
           {storiesList.map(each => {
             const {userName, storyUrl} = each
             return (
               <ul className="story-container">
-                <li key={each.userId}>
-                  <img
-                    src={storyUrl}
-                    alt="user story"
-                    className="story-image"
-                  />
+                <li className="story-item-container" key={each.userId}>
+                  <div>
+                    <img
+                      src={storyUrl}
+                      alt="user story"
+                      className="story-image"
+                    />
+                  </div>
                   <p className="story-user-name">{userName}</p>
                 </li>
               </ul>
             )
           })}
         </Slider>
-      </div>
+      </>
     )
   }
 
-  renderFailureView = () => <h1>Failure</h1>
+  renderFailureView = () => (
+    <div className="stories-error-view-container">
+      <img
+        src="https://res.cloudinary.com/dzvmpn4nr/image/upload/v1679656589/alert-triangle_hsre5i.svg"
+        alt="failure view"
+        className="posts-failure-img"
+      />
+      <p className="posts-failure-text">
+        Something went wrong. Please try again.
+      </p>
+      <button
+        type="button"
+        data-testid="button"
+        className="profile-failure-button"
+        onClick={this.getStoriesList}
+      >
+        Try again
+      </button>
+    </div>
+  )
 
   renderLoadingView = () => (
     // eslint-disable-next-line react/no-unknown-property

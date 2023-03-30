@@ -64,7 +64,7 @@ class PostItem extends Component {
       postDetails,
       comments,
       createdAt,
-      postId,
+      //   postId,
       profilePic,
       userId,
       userName,

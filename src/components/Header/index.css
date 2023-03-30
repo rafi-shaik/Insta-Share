@@ -32,6 +32,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 15px;
+
   padding-left: 7px;
   padding-right: 7px;
   width: 100%;
@@ -132,7 +133,7 @@
   border: none;
   outline: none;
   padding-left: 10px;
-  color: #989898;
+  color: #262626;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;

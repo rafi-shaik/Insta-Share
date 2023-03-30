@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Header extends Component {
-  state = {displayMenu: false, searchInput: '', showSearchbar: false}
+  state = {displayMenu: false, showSearchbar: false}
 
   showMenubar = () => {
     this.setState({displayMenu: true})
@@ -31,11 +31,17 @@ class Header extends Component {
   }
 
   changeInput = event => {
-    this.setState({searchInput: event.target.value})
+    const {changeSearchInput} = this.props
+    changeSearchInput(event.target.value)
+  }
+
+  searchClicked = () => {
+    const {clickSearchButton} = this.props
+    clickSearchButton()
   }
 
   renderMobileSearchbar = () => {
-    const {searchInput} = this.state
+    const {searchInput} = this.props
     return (
       <div className="search-bar-mobile">
         <input
@@ -48,8 +54,9 @@ class Header extends Component {
         <button
           className="search-button"
           type="button"
-          data-testid="searchIcon"
-          //   onClick={this.searchClicked}
+          // eslint-disable-next-line react/no-unknown-property
+          testid="searchIcon"
+          onClick={this.searchClicked}
         >
           <FaSearch className="search-icon" />
         </button>
@@ -58,7 +65,7 @@ class Header extends Component {
   }
 
   renderLargeSearchbar = () => {
-    const {searchInput} = this.state
+    const {searchInput} = this.props
     return (
       <div className="search-bar">
         <input
@@ -71,8 +78,9 @@ class Header extends Component {
         <button
           className="search-button"
           type="button"
-          data-testid="searchIcon"
-          //   onClick={this.searchClicked}
+          // eslint-disable-next-line react/no-unknown-property
+          testid="searchIcon"
+          onClick={this.searchClicked}
         >
           <FaSearch className="search-icon" />
         </button>
