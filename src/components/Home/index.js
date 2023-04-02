@@ -22,13 +22,10 @@ class Home extends Component {
     apiStatus: apiStatusConstants.initial,
   }
 
-  //   componentDidMount() {
-  //     this.getSearchData()
-  //   }
-
   getSearchData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const {searchInput} = this.state
+
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
     const options = {
@@ -40,39 +37,64 @@ class Home extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      //   console.log(data)
+      const updatedData = data.posts.map(each => ({
+        comments: each.comments.map(eachComment => ({
+          userName: eachComment.user_name,
+          userId: eachComment.user_id,
+          comment: eachComment.comment,
+        })),
+        createdAt: each.created_at,
+        likesCount: each.likes_count,
+        postDetails: {
+          imageUrl: each.post_details.image_url,
+          caption: each.post_details.caption,
+        },
+        postId: each.post_id,
+        profilePic: each.profile_pic,
+        userId: each.user_id,
+        userName: each.user_name,
+      }))
+      console.log(updatedData)
       this.setState({
         apiStatus: apiStatusConstants.success,
-        searchResults: data.posts,
+        searchResults: updatedData,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
-  clickSearchButton = () => {
-    console.log('button clicked')
-    this.getSearchData()
-  }
-
-  changeSearchInput = input => {
-    console.log(input)
-    this.setState({searchInput: input})
+  clickSearchButton = input => {
+    this.setState({searchInput: input}, this.getSearchData)
   }
 
   renderSuccessView = () => {
     const {searchResults} = this.state
     return (
-      <>
+      <div className="posts-main-container">
         {searchResults.length === 0 ? (
-          <>
-            <StoriesSlider />
-            <Posts />
-          </>
+          <div className="no-posts-container">
+            <img
+              src="https://res.cloudinary.com/dzvmpn4nr/image/upload/v1679656768/Group_uiehcz.svg"
+              alt="search not found"
+              className="not-found-image"
+            />
+            <h1 className="search-not-found-text">Search Not Found</h1>
+            <p className="search-not-found-para">
+              Try different keyword or search again
+            </p>
+          </div>
         ) : (
-          <SearchResults searchResults={searchResults} />
+          <div className="search-container">
+            <h1 className="search-heading">Search Results</h1>
+            <ul className="search-posts-list">
+              {searchResults.map(each => (
+                <SearchResults details={each} key={each.postId} />
+              ))}
+            </ul>
+          </div>
         )}
-      </>
+      </div>
     )
   }
 
@@ -122,13 +144,15 @@ class Home extends Component {
     const {searchInput} = this.state
     return (
       <>
-        <Header
-          searchInput={searchInput}
-          changeSearchInput={this.changeSearchInput}
-          clickSearchButton={this.clickSearchButton}
-        />
-
-        {this.renderViews()}
+        <Header clickSearchButton={this.clickSearchButton} />
+        {searchInput === '' ? (
+          <>
+            <StoriesSlider />
+            <Posts />
+          </>
+        ) : (
+          this.renderViews()
+        )}
       </>
     )
   }

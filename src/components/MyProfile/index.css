@@ -10,6 +10,16 @@
   width: 560px;
 }
 
+@media screen and (max-width: 767px) {
+  .profile-failure-img {
+    width: 250px;
+  }
+
+  .profile-failure-text {
+    font-size: 16px;
+  }
+}
+
 .profile-failure-text {
   font-family: 'Roboto';
   font-style: normal;

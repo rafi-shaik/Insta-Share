@@ -50,7 +50,7 @@ class Posts extends Component {
         userId: each.user_id,
         userName: each.user_name,
       }))
-      console.log(updatedData)
+      //   console.log(updatedData)
       this.setState({
         apiStatus: apiStatusConstants.success,
         postsData: updatedData,

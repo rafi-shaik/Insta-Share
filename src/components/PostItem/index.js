@@ -64,7 +64,6 @@ class PostItem extends Component {
       postDetails,
       comments,
       createdAt,
-      //   postId,
       profilePic,
       userId,
       userName,
@@ -72,7 +71,7 @@ class PostItem extends Component {
     const {imageUrl, caption} = postDetails
     const {isLiked, likes} = this.state
     return (
-      <div className="post-item-container">
+      <li className="post-item-container">
         <div className="post-item-header">
           <img
             src={profilePic}
@@ -110,19 +109,21 @@ class PostItem extends Component {
             <FaRegComment className="post-item-icon" />
             <BiShareAlt className="post-item-icon" />
           </div>
-          <h1 className="post-item-likes">{likes} likes</h1>
+          <p className="post-item-likes">{likes} likes</p>
           <p className="post-item-caption">{caption}</p>
           <ul className="comments-list-container">
             {comments.map(each => (
               <li className="comment-item" key={each.userId}>
-                <span className="comment-username">{each.userName}</span>{' '}
-                {each.comment}
+                <p>
+                  <span className="comment-username">{each.userName}</span>
+                  {each.comment}
+                </p>
               </li>
             ))}
           </ul>
           <p className="post-item-time">{createdAt}</p>
         </div>
-      </div>
+      </li>
     )
   }
 }

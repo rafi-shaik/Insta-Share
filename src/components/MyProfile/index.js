@@ -37,7 +37,7 @@ class MyProfile extends Component {
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
-      //   console.log(data)
+      console.log(data)
       const updatedData = {
         followersCount: data.profile.followers_count,
         followingCount: data.profile.following_count,
@@ -50,7 +50,7 @@ class MyProfile extends Component {
         posts: data.profile.posts,
         stories: data.profile.stories,
       }
-      //   console.log(updatedData)
+      console.log(updatedData)
       this.setState({
         apiStatus: apiStatusConstants.success,
         userData: updatedData,

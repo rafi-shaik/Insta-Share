@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Header extends Component {
-  state = {displayMenu: false, showSearchbar: false}
+  state = {displayMenu: false, showSearchbar: false, searchInput: ''}
 
   showMenubar = () => {
     this.setState({displayMenu: true})
@@ -31,17 +31,17 @@ class Header extends Component {
   }
 
   changeInput = event => {
-    const {changeSearchInput} = this.props
-    changeSearchInput(event.target.value)
+    this.setState({searchInput: event.target.value})
   }
 
   searchClicked = () => {
+    const {searchInput} = this.state
     const {clickSearchButton} = this.props
-    clickSearchButton()
+    clickSearchButton(searchInput)
   }
 
   renderMobileSearchbar = () => {
-    const {searchInput} = this.props
+    const {searchInput} = this.state
     return (
       <div className="search-bar-mobile">
         <input
@@ -65,7 +65,7 @@ class Header extends Component {
   }
 
   renderLargeSearchbar = () => {
-    const {searchInput} = this.props
+    const {searchInput} = this.state
     return (
       <div className="search-bar">
         <input
@@ -189,14 +189,17 @@ class Header extends Component {
                     Profile
                   </Link>
                 </li>
+
+                <li className="nav-menu-item">
+                  <button
+                    type="button"
+                    className="logout-desktop-btn"
+                    onClick={this.onClickLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
               </ul>
-              <button
-                type="button"
-                className="logout-desktop-btn"
-                onClick={this.onClickLogout}
-              >
-                Logout
-              </button>
             </div>
           </div>
         </div>
